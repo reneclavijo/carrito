@@ -50,7 +50,7 @@
                     {class: 'form-select'}) %>
                 <% if producto.errors[:categoria_id].any? %>
                     <div style="color: red;">
-                        <%= producto.errors[:categoria_id].first %>
+                        <%= producto.errors[:categoria_id].first.full_message %>
                     </div>
                 <% end %>
             </div>

@@ -9,6 +9,4 @@ class Producto < ApplicationRecord
   validates(:descripcion,     presence: true)
   validates(:cantidad,        presence: true)
   validates(:categoria_id,    presence: true)
-
-  validates :imagenes, attached: true
 end
