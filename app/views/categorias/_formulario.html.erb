@@ -2,7 +2,9 @@
 
     <%= formulario.label :categoria %>
     <%= formulario.text_field :categoria %>
-
+    <% if categoria.errors[:categoria].any? %>
+        <%= categoria.errors[:categoria].first %>
+    <% end %>
 
     <%= formulario.submit 'Enviar' %>
 

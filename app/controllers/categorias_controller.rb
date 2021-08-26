@@ -40,7 +40,7 @@ class CategoriasController < ApplicationController
         end
     end
 
-    #DELETE
+    # DELETE
     def eliminar
         @categoria.destroy
         redirect_to categorias_path

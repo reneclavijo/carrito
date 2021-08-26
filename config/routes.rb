@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get 'productos',              to: 'productos#listar',   as: 'productos'
   get 'productos/crear',        to: 'productos#crear',    as: 'nuevo_producto'
   get 'productos/:id',          to: 'productos#mostrar',  as: 'producto'
-  get 'productos/:id/editar',   to: 'productos#editar',   as: 'edtar_producto'
+  get 'productos/:id/editar',   to: 'productos#editar',   as: 'editar_producto'
 
   post    'productos',     to: 'productos#guardar'
   put     'productos/:id', to: 'productos#actualizar'
