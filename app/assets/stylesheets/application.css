@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+/* #fafafa => plomo clarito */
+/* #00bcd4 => Color primary*/
+
+body {
+    background-color: #fafafa;
+}
+

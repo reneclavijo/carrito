@@ -5,7 +5,10 @@ class Producto < ApplicationRecord
   validates(:nombre,      presence: true)
   validates(:nombre,      uniqueness: true)
   
-  validates(:precio,      presence: true)
-  validates(:descripcion, presence: true)
-  validates(:cantidad,    presence: true)
+  validates(:precio,          presence: true)
+  validates(:descripcion,     presence: true)
+  validates(:cantidad,        presence: true)
+  validates(:categoria_id,    presence: true)
+
+  validates :imagenes, attached: true
 end
