@@ -1,37 +1,36 @@
 <h1>Productos registrados</h1>
 
 <%= link_to 'Nuevo producto', nuevo_producto_path %>
-<table>
+
+<table class="table">
     <tr>
+        <th>Imagen</th>
         <th>Nombre</th>
         <th>Precio</th>
         <th>Cantidad</th>
-        <th>Categoria</th>
-        <th>Imagenes</th>
+        <th>Categoría</th>
+        <th>Acciones</th>
     </tr>
     <% @productos.each do |producto| %>
         <tr>
-            <td><%= producto.nombre %></td>
+            <td>
+                <% if producto.imagenes.attached? %>
+                    <%= link_to producto_path(producto) do %>
+                        <%= image_tag producto.imagenes.first, style: 'width: 100%' %>
+                    <% end %>
+                <% else %>
+                    No hay fotos registradas
+                <% end %>
+            </td>
+
+            <td>
+                <%= link_to producto.nombre, producto_path(producto) %>
+            </td>
             <td><%= producto.precio %></td>
             <td><%= producto.cantidad %></td>
             <td><%= producto.categoria.categoria %></td>
             <td>
-                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <% producto.imagenes.each_with_index do |imagen, index| %>
-                            <% if index == 0 %>
-                                <div class="carousel-item active">
-                                    <%= image_tag imagen, class: 'd-block w-100' %>
-                                </div>
-                            <% else %>
-                                <div class="carousel-item">
-                                    <%= image_tag imagen, class: 'd-block w-100' %>
-                                </div>
-                            <% end %>
-                        <% end %>
-                    </div>
-                </div>
-              
+
             </td>
         </tr>
     <% end %>

@@ -7,8 +7,8 @@ class CategoriasController < ApplicationController
     end
 
     # GET
-    def mostrar
-
+    def mostrar        
+        
     end
     
     # GET
