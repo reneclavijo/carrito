@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # páginas
   root 'paginas#inicio'
+  get   '/carrito', to: 'paginas#carro'
 
   # carros
   post 'carros/:id_producto', to: 'carros#agregar_producto', as: 'agregar_producto'
