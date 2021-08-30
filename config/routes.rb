@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  # páginas
+  root 'paginas#inicio'
+
+  # carros
+  post 'carros/:id_producto', to: 'carros#agregar_producto', as: 'agregar_producto'
+
+
+
+
   # categorias
   get 'categorias',             to: 'categorias#listar',  as: 'categorias'
   get 'categorias/crear',       to: 'categorias#crear',   as: 'nueva_categoria'
