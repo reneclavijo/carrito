@@ -14,13 +14,19 @@
                         <p>Cantidad:</p>
                         <div class="row">
                             <div class="col">
-                                <%= link_to '-', disminuir_producto_path(contenido_carrito.producto), method: :delete, class: 'btn btn-secondary' %>
+                                <%= link_to '-', 
+                                disminuir_producto_path(contenido_carrito.producto), 
+                                method: :delete, 
+                                class: 'btn btn-secondary' %>
                             </div>
                             <div class="col">
                                 <p><%= contenido_carrito.cantidad %></p>
                             </div>
                             <div class="col">
-                                <%= link_to '+', agregar_producto_path(contenido_carrito.producto), method: :post, class: 'btn btn-secondary' %>
+                                <%= link_to '+', 
+                                aumentar_producto_path(contenido_carrito.producto), 
+                                method: :post, 
+                                class: 'btn btn-secondary' %>
                             </div>
                         </div>
                         
