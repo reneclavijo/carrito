@@ -1,5 +1,5 @@
 class CarrosContenido < ApplicationRecord
-  
+
   before_save :actualizar_total
 
   belongs_to :carro
@@ -9,5 +9,6 @@ class CarrosContenido < ApplicationRecord
     
   def actualizar_total
       self.carro.total = self.carro.productos.map{ |producto| producto.precio }.sum
+      self.carro.save
   end
 end
