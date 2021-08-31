@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   # carros
   post    'carros/:id_producto',          to: 'carros#agregar_producto',            as: 'agregar_producto'
-  post    'carros/:id_producto/cantidad', to: 'carros#aumentar_cantidad_producto',  as: 'aumentar_producto'
+  put     'carros/:id_producto/cantidad', to: 'carros#aumentar_cantidad_producto',  as: 'aumentar_producto'
   delete  'carros/:id_producto',          to: 'carros#eliminar_producto',           as: 'eliminar_producto'
   delete  'carros/:id_producto/cantidad', to: 'carros#disminuir_cantidad_producto', as: 'disminuir_producto'
 
