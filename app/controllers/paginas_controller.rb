@@ -9,5 +9,9 @@ class PaginasController < ApplicationController
     def carro
         
     end
+
+    def formulario_pedido
+        @destinos = Destino.select(:id, :nombre).order(nombre: :asc)
+    end
     
 end
