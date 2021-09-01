@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_31_185234) do
+ActiveRecord::Schema.define(version: 2021_08_31_185334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,16 @@ ActiveRecord::Schema.define(version: 2021_08_31_185234) do
     t.index ["region_id"], name: "index_destinos_on_region_id"
   end
 
+  create_table "detalles_pedidos", force: :cascade do |t|
+    t.integer "cantidad"
+    t.bigint "producto_id", null: false
+    t.bigint "pedido_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["pedido_id"], name: "index_detalles_pedidos_on_pedido_id"
+    t.index ["producto_id"], name: "index_detalles_pedidos_on_producto_id"
+  end
+
   create_table "estados_pedidos", force: :cascade do |t|
     t.string "estado"
     t.datetime "created_at", precision: 6, null: false
@@ -142,10 +152,12 @@ ActiveRecord::Schema.define(version: 2021_08_31_185234) do
   add_foreign_key "carros_contenidos", "carros"
   add_foreign_key "carros_contenidos", "productos"
   add_foreign_key "destinos", "regiones"
+  add_foreign_key "detalles_pedidos", "pedidos"
+  add_foreign_key "detalles_pedidos", "productos"
   add_foreign_key "pedidos", "datos_envios"
   add_foreign_key "pedidos", "destinos"
   add_foreign_key "pedidos", "estados_pedidos"
   add_foreign_key "productos", "categorias"
   add_foreign_key "ventas", "pedidos"
-  add_foreign_key "ventas", "tipos_pagos", column: "tipos_pago_id"
+  add_foreign_key "ventas", "tipos_pagos"
 end

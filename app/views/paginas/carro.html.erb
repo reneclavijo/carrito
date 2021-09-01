@@ -16,8 +16,8 @@
                             <div class="col">
                                 <%= link_to '-', 
                                 disminuir_producto_path(contenido_carrito.producto), 
-                                method: :delete, 
-                                class: 'btn btn-secondary' %>
+                                method: :delete,
+                                class: 'btn btn-secondary'%>
                             </div>
                             <div class="col">
                                 <p><%= contenido_carrito.cantidad %></p>
@@ -26,7 +26,8 @@
                                 <%= link_to '+', 
                                 aumentar_producto_path(contenido_carrito.producto), 
                                 method: :put, 
-                                class: 'btn btn-secondary' %>
+                                class: 'btn btn-secondary',
+                                remote: true %>
                             </div>
                         </div>
                         

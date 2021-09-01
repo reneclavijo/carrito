@@ -35,4 +35,15 @@ Rails.application.routes.draw do
   delete  'productos/:id',                      to: 'productos#eliminar'
   
   delete  'productos/:id/imagenes/:id_imagen',  to: 'productos#eliminar_foto',  as: 'eliminar_foto'
+
+  # detinos
+  get 'destinos',             to: 'destinos#listar',  as: 'destinos'
+  get 'destinos/crear',       to: 'destinos#crear',   as: 'nuevo_destino'
+  get 'destinos/:id',         to: 'destinos#mostrar', as: 'destino'
+  get 'destinos/:id/editar',  to: 'destinos#editar',  as: 'editar_destino'
+
+  post    'destinos',     to: 'destinos#guardar'
+  put     'destinos/:id', to: 'destinos#actualizar'
+  patch   'destinos/:id', to: 'destinos#actualizar'
+  delete  'destinos/:id', to: 'destinos#eliminar'
 end
