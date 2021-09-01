@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   # páginas
   root 'paginas#inicio'
   get   '/carrito',     to: 'paginas#carro',              as: 'carrito'
-  get   '/formulario',  to: 'paginas#formulario_pedido',  as: 'formulario_pedido'
 
   # carros
   post    'carros/:id_producto',          to: 'carros#agregar_producto',            as: 'agregar_producto'
@@ -47,4 +46,8 @@ Rails.application.routes.draw do
   put     'destinos/:id', to: 'destinos#actualizar'
   patch   'destinos/:id', to: 'destinos#actualizar'
   delete  'destinos/:id', to: 'destinos#eliminar'
+
+  # pedidos
+  get   'pedidos/crear',  to: 'pedidos#crear',  as: 'nuevo_pedido'
+  post  'pedidos',        to: 'pedidos#guardar',  as: 'crear_pedido_cliente'
 end
