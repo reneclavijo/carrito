@@ -1,5 +1,6 @@
 class DatosEnvio < ApplicationRecord
-
+    has_many :pedidos
+    
     validates(:nombre, presence: true)
     validates(:direccion, presence: true)
     validates(:correo, presence: true)

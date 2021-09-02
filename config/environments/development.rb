@@ -40,13 +40,13 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
 
-  config.action_mailer.smtp_setting = {
-    addres:               'smtp.office365.com',
+  config.action_mailer.smtp_settings = {
+    addres:               'smtp.live.com',
     port:                 587,
-    user_name:            "<%= Rails.application.credentials.correo[:direccion] %>",
-    password:             "<%= Rails.application.credentials.correo[:password] %>",
-    authentication:       'plain',
-    enable_starttls_auto: true
+    user_name:            Rails.application.credentials.correo[:direccion],
+    password:             Rails.application.credentials.correo[:password],
+    authentication:       'login',
+    enable_starttls_auto: 'none'
   }
 
 
