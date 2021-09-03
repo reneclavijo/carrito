@@ -1,4 +1,5 @@
 class PedidosController < ApplicationController
+    layout 'paginas'
     
     before_action :validar_carro
 
