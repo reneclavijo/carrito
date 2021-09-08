@@ -1,6 +1,4 @@
-namespace :deploy do
-    desc "reload the database with seed data"
-    task :seed do
-        run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
-    end
+desc "reload the database with seed data"
+task :seed do
+    exec("cd #{current_path}; rails db:seed -e production")
 end
