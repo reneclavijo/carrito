@@ -49,8 +49,14 @@ Rails.application.routes.draw do
   delete  'destinos/:id', to: 'destinos#eliminar'
 
   # pedidos
-  get   'pedidos/crear',  to: 'pedidos#crear',    as: 'nuevo_pedido'
-  get   'pedidos',        to: 'pedidos#pagar',    as: 'pagar'
+  get   'pedidos',        to: 'pedidos#crear',    as: 'nuevo_pedido'
+  get   'pagar',          to: 'pedidos#pagar',    as: 'pagar'
   
   post  'pedidos',        to: 'pedidos#guardar',  as: 'crear_pedido_cliente'
+
+  # admin
+
+  namespace :admin do
+    get '/', to: 'pedidos#listar'
+  end
 end
