@@ -6,12 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-if TiposPago.count == 0
-    TiposPago.create([
-        {pago: 'efectivo'},
-        {pago: 'tarjeta'},
-    ])
-end
+
+TiposPago.find_or_create([
+    {pago: 'efectivo'},
+    {pago: 'tarjeta'},
+])
+
 
 if EstadosPedido.count == 0
     EstadosPedido.create([
