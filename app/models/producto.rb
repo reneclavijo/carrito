@@ -1,7 +1,12 @@
 class Producto < ApplicationRecord
   # TODO: para clientes con rut \d{1,2}\.\d{3}\.\d{3}[-][0-9kK]{1}
+  
+  # TODO: Agregar valor por defecto al campo de estados_producto_id
 
   belongs_to :categoria
+  #belongs_to :estado, class_name: 'EstadosProducto'
+  belongs_to :estados_producto
+
   has_many_attached :imagenes
 
   has_many :carros_contenidos
