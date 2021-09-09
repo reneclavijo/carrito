@@ -1,6 +1,17 @@
-desc "reload the database with seed data"
-task :seed do
-    exec("cd #{current_path}; rails db:seed -e production")
+# desc "ejecutar semilla de la base de datos"
+# task :semilla do
+#     exec("rake db:seed RAILS_ENV=production")
+# end
+
+namespace :deploy do
+    desc "reload the database with seed data"
+    task :semilla do
+        on roles(:all) do
+            within current_path do
+                execute :bundle, :exec, 'rails', 'db:seed', 'RAILS_ENV=production'
+            end
+        end
+    end
 end
 
-after "deploy:migrating", "seed"
+after "deploy:migrate", "semilla"

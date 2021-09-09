@@ -1,5 +1,5 @@
 class Producto < ApplicationRecord
-  # todo: para clientes con rut \d{1,2}\.\d{3}\.\d{3}[-][0-9kK]{1}
+  # TODO: para clientes con rut \d{1,2}\.\d{3}\.\d{3}[-][0-9kK]{1}
 
   belongs_to :categoria
   has_many_attached :imagenes
