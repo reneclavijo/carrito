@@ -1,37 +1,16 @@
-<h1>Productos registrados</h1>
+<div class="row">
+    <div class="col">
+        <h2>Productos Registrados</h2>
+    </div>
+    <div class="col text-end">
+        <%= link_to 'Nuevo producto', nuevo_producto_path, class: "btn btn-success" %>
+    </div>
+</div>
 
-<%= link_to 'Nuevo producto', nuevo_producto_path %>
 
-<table class="table">
-    <tr>
-        <th>Imagen</th>
-        <th>Nombre</th>
-        <th>Precio</th>
-        <th>Cantidad</th>
-        <th>Categoría</th>
-        <th>Acciones</th>
-    </tr>
-    <% @productos.each do |producto| %>
-        <tr>
-            <td>
-                <% if producto.imagenes.attached? %>
-                    <%= link_to producto_path(producto) do %>
-                        <%= image_tag producto.imagenes.first, style: 'width: 100%' %>
-                    <% end %>
-                <% else %>
-                    No hay fotos registradas
-                <% end %>
-            </td>
+<h5>Activos</h5>
+<%= render 'tabla_productos', productos: @productos_activos %>
 
-            <td>
-                <%= link_to producto.nombre, producto_path(producto) %>
-            </td>
-            <td><%= producto.precio %></td>
-            <td><%= producto.cantidad %></td>
-            <td><%= producto.categoria.categoria %></td>
-            <td>
 
-            </td>
-        </tr>
-    <% end %>
-</table>
+<h5>Inactivos</h5>
+<%= render 'tabla_productos', productos: @productos_inactivos %>

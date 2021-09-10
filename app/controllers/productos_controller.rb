@@ -1,10 +1,14 @@
 class ProductosController < ApplicationController
 
+    include ProductosHelper
+
     before_action :asignar_producto, only: [:mostrar, :editar, :actualizar, :eliminar, :eliminar_foto]
 
     # GET
     def listar
-        @productos = Producto.includes(:categoria).select(:id, :nombre, :precio, :cantidad, :categoria_id).order(nombre: :asc)
+        @productos_activos      = Producto.includes(:categoria).select(:id, :nombre, :precio, :cantidad, :categoria_id, :estados_producto_id).order(nombre: :asc).where("estados_producto_id = 1")
+        @productos_inactivos    = Producto.includes(:categoria).select(:id, :nombre, :precio, :cantidad, :categoria_id, :estados_producto_id).order(nombre: :asc).where("estados_producto_id = 2")
+
     end
 
     # GET
@@ -38,6 +42,7 @@ class ProductosController < ApplicationController
     # POST
     def guardar
         @producto = Producto.new(params_producto)
+        @producto.estados_producto = evaluar_estado(params_estado_producto)
         if @producto.save
             redirect_to action: :listar
         else
@@ -48,13 +53,9 @@ class ProductosController < ApplicationController
 
     # PUT/PATCH
     def actualizar
-        if params_producto[:estados_producto_id] == 0
-            @producto.estados_producto = EstadosProducto.find_by(estado: 'inactivo')
-        else
-            @producto.estados_producto = EstadosProducto.find_by(estado: 'activo')
-        end
 
         if @producto.update(params_producto)
+            actualizar_estado(params_estado_producto, @producto)
             redirect_to producto_path(@producto)
         else
             consultar_categorias
@@ -63,13 +64,13 @@ class ProductosController < ApplicationController
     end
 
     #DELETE
-    def eliminar
-        # TODO: Configurar con Active Job
-        # @producto.imagenes.purge_later
-        @producto.estados_producto = EstadosProducto.find_by(estado: 'inactivo')
-        @producto.save
-        redirect_to action: :listar
-    end
+    # def eliminar
+    #     # TODO: Configurar con Active Job
+    #     # @producto.imagenes.purge_later
+    #     @producto.estados_producto = EstadosProducto.find_by(estado: 'inactivo')
+    #     @producto.save
+    #     redirect_to action: :listar
+    # end
 
     # DELETE
     def eliminar_foto
@@ -80,7 +81,7 @@ class ProductosController < ApplicationController
     private
     
     def asignar_producto
-        @producto = Producto.find(params[:id])
+        @producto = Producto.includes(:estados_producto, :categoria).find(params[:id])
     rescue ActiveRecord::RecordNotFound
         redirect_to action: :listar
     end
@@ -88,7 +89,11 @@ class ProductosController < ApplicationController
     def params_producto
         params.require(:producto)
         .permit(:nombre, :precio, :descripcion, 
-            :cantidad, :categoria_id, :estados_producto_id, imagenes: [])
+            :cantidad, :categoria_id, imagenes: [])
+    end
+
+    def params_estado_producto
+        params.require(:producto).permit(:estados_producto_id)[:estados_producto_id] # Regresa solo 0 o 1
     end
 
     def consultar_categorias
