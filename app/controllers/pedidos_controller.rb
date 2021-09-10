@@ -1,7 +1,7 @@
 class PedidosController < ApplicationController
 
     include PedidosHelper
-    layout 'paginas', only: [:crear, :pagar]
+    layout 'paginas'
     before_action :validar_carro
     before_action :validar_productos_carrito, only: :crear
     

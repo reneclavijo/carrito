@@ -3,14 +3,14 @@
         <h2>Productos Registrados</h2>
     </div>
     <div class="col text-end">
-        <%= link_to 'Nuevo producto', nuevo_producto_path, class: "btn btn-success" %>
+        <%= link_to 'Nuevo producto', admin_nuevo_producto_path, class: "btn btn-success" %>
     </div>
 </div>
 
 
-<h5>Activos</h5>
+<h5 class="animate__animated animate__fadeInDown">Activos</h5>
 <%= render 'tabla_productos', productos: @productos_activos %>
 
 
-<h5>Inactivos</h5>
+<h5 class="animate__animated animate__fadeInDown">Inactivos</h5>
 <%= render 'tabla_productos', productos: @productos_inactivos %>
