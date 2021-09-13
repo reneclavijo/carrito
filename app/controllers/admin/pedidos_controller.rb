@@ -1,5 +1,7 @@
 class Admin::PedidosController < Admin::AdminController
     
+    before_action :asignar_pedido, only: [:mostrar, :editar, :actualizar]
+
     # GET
     def listar
         @pedidos = Pedido.select(:id, :codigo, :total, :created_at).order(created_at: :desc)
@@ -35,6 +37,16 @@ class Admin::PedidosController < Admin::AdminController
 
     private 
     def params_pedidos
+    end
+
+    def asignar_pedido
+        
+        @pedido = Pedido.find(params[:id])
+
+    rescue ActiveRecord::RecordNotFound
+
+        flash[:errors] = "Pedido #{params[:id]} no encontrado"
+        redirect_to action: :listar
     end
 
 end
