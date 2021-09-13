@@ -1,9 +1,12 @@
 class Admin::PedidosController < Admin::AdminController
     
+    include Admin::PedidosHelper
+
     before_action :asignar_pedido, only: [:mostrar, :editar, :actualizar]
 
     # GET
     def listar
+        saludar
         @pedidos = Pedido.select(:id, :codigo, :total, :created_at).order(created_at: :desc)
     end
 
@@ -20,6 +23,14 @@ class Admin::PedidosController < Admin::AdminController
     # GET
     def editar
         #TODO editar la info de un pedido EXCEPTO el código
+        # @datos_pedido = @pedido.datos_envio
+        @datos_pedido = PedidosFormulario.new
+        @datos_pedido.id            = @pedido.id
+        @datos_pedido.nombre        = @pedido.datos_envio.nombre
+        @datos_pedido.correo        = @pedido.datos_envio.correo
+        @datos_pedido.telefono      = @pedido.datos_envio.telefono
+        @datos_pedido.direccion     = @pedido.datos_envio.direccion
+        @datos_pedido.destino_id    = @pedido.destino.id
     end
 
     # POST
