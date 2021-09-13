@@ -1,6 +1,14 @@
-<h2>
-    PEDIDO <%= @pedido.codigo %> 📦
-</h2>
+<div class="row">
+    <div class="col-10">
+        <h2>
+            PEDIDO <%= @pedido.codigo %> 📦
+        </h2>    
+    </div>
+    <div class="col-2 text-end">
+        <%= link_to "Editar", admin_editar_pedido_path(@pedido), class: 'btn btn-success' %>
+    </div>
+</div>
+
 
 <div class="row mt-2">
     <div class="col-4">
@@ -11,9 +19,12 @@
 </div>    
 
 <div class="row mt-1">
-    <div class="col-6">
+    <div class="col-8">
         <div class="card">
             <div class="card-body">
+                <h4 class="card-title">
+                    Datos envío
+                </h4>
                 <!-- DATOS DE ENVÍO -->
                 <div class="row">
                     <div class="col-12">
@@ -45,16 +56,19 @@
             </div>
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-4">
         <div class="row justify-content-end">
-            <div class="col-6">
+            <div class="col-12">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body text-center">
                         <h6>
                             <strong>
-                                TOTAL: <%= @pedido.total %>
+                                TOTAL:
                             </strong>
                         </h6>
+                        <p>
+                            <%= @pedido.total %>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -65,7 +79,10 @@
 
 <div class="card mt-3">
     <div class="card-body">
-        <div class="row">
+        <h4 class="card-title">
+            Productos
+        </h4>
+        <div class="row  text-center">
             <div class="col-12">
                 <div class="row">
                     <div class="col-2">
@@ -90,7 +107,7 @@
                     </div>
                 </div>
                 <% @pedido.detalles_pedidos.each do |detalle| %>
-                    <div class="row">
+                    <div class="row mt-5">
                         <div class="col-2">
                             <%= image_tag detalle.producto.imagenes.first, class: 'w-100' %>                
                         </div>
@@ -108,5 +125,4 @@
                 <!-- MOSTRAR LOS PRODUCTOS -->
             </div>
         </div>
-</div>
 </div>
