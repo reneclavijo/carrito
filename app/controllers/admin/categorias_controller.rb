@@ -1,13 +1,13 @@
 class Admin::CategoriasController < Admin::AdminController
 
-    before_action :asignar_categoria, only: [:mostrar, :editar, :actualizar, :eliminar]
+    before_action :asignar_categoria, only: %i(mostrar, editar, actualizar, eliminar)
     # GET
     def listar
         @categorias = Categoria.select(:id, :categoria).order(categoria: :asc)
     end
 
     # GET
-    def mostrar        
+    def mostrar
         
     end
     

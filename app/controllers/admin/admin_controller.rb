@@ -1,3 +1,4 @@
-class Admin::AdminController < ApplicationController
+# frozen_string_literal: true
 
+class Admin::AdminController < ApplicationController 
 end
