@@ -6,7 +6,6 @@ class Admin::PedidosController < Admin::AdminController
 
     # GET
     def listar
-        saludar
         @pedidos = Pedido.select(:id, :codigo, :total, :created_at).order(created_at: :desc)
     end
 
@@ -31,6 +30,7 @@ class Admin::PedidosController < Admin::AdminController
         @datos_pedido.telefono      = @pedido.datos_envio.telefono
         @datos_pedido.direccion     = @pedido.datos_envio.direccion
         @datos_pedido.destino_id    = @pedido.destino.id
+        @destinos = Destino.select(:id, :nombre).order(nombre: :asc)
     end
 
     # POST
@@ -39,6 +39,13 @@ class Admin::PedidosController < Admin::AdminController
 
     # PUT/PATCH
     def actualizar
+        @datos_pedido = PedidosFormulario.new(params_pedidos)
+        if @datos_pedido.valid?
+            # continue
+        else
+            @destinos = Destino.select(:id, :nombre).order(nombre: :asc)
+            render :editar
+        end
     end
 
     # DELETE
@@ -48,6 +55,7 @@ class Admin::PedidosController < Admin::AdminController
 
     private 
     def params_pedidos
+        params.require(:admin_pedidos_helper_pedidos_formulario).permit(:nombre, :correo, :telefono, :direccion, :destino_id)
     end
 
     def asignar_pedido

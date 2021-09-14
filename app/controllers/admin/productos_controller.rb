@@ -7,8 +7,7 @@ class Admin::ProductosController < Admin::AdminController
     # GET
     def listar
         @productos_activos      = Producto.includes(:categoria).select(:id, :nombre, :precio, :cantidad, :categoria_id, :estados_producto_id).order(nombre: :asc).where("estados_producto_id = 1")
-        @productos_inactivos    = Producto.includes(:categoria).select(:id, :nombre, :precio, :cantidad, :categoria_id, :estados_producto_id).order(nombre: :asc).where("estados_producto_id = 2")
-
+        @productos_inactivos    = Producto.includes(:categoria).select(:id, :nombre, :precio, :cantidad, :categoria_id, :estados_producto_id).order(nombre: :asc).where("estados_producto_id = 2 OR estados_producto_id = null")
     end
 
     # GET
