@@ -77,13 +77,15 @@ class Admin::PedidosController < Admin::AdminController
 
     # PUT pedidos/:id/productos/:id_producto
     def aumentar_cantidad_producto
-        detalle_pedido = @pedido.detalles_pedidos.find_by(producto_id: params[:id_producto])
-        detalle_pedido.cantidad += 1
-        detalle_pedido.save
+        @detalle_pedido = @pedido.detalles_pedidos.find_by(producto_id: params[:id_producto])
+        @detalle_pedido.cantidad += 1
+        @detalle_pedido.save
 
-        respond_to do |format|
-            format.json { render json: {id: detalle_pedido.producto.id, cantidad: detalle_pedido.cantidad} }
-        end
+        redirect_to :editar
+        # respond_to do |format|
+        #     format.js
+        #     # format.json { render json: detalle_pedido.producto }
+        # end
     end
     
     # DELETE pedidos/:id/productos/:id_producto
@@ -96,9 +98,10 @@ class Admin::PedidosController < Admin::AdminController
             detalle_pedido.save
         end
 
-        respond_to do |format|
-            format.json { render json: {id: detalle_pedido.producto.id, cantidad: detalle_pedido.cantidad} }
-        end
+        redirect_to action: :editar
+        # respond_to do |format|
+        #     format.json { render json: {id: detalle_pedido.producto.id, cantidad: detalle_pedido.cantidad} }
+        # end
     end
 
     # DELETE pedidos/:id/productos/:id_producto/eliminar
