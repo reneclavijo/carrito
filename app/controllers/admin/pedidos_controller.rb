@@ -15,6 +15,12 @@ class Admin::PedidosController < Admin::AdminController
     end
 
     # GET
+    def agregar_producto
+        @todos_los_productos = Producto.select(:id, :nombre, :precio, :estados_producto_id)
+                                .order(nombre: :asc).where("estados_producto_id = 1 and cantidad > 0")
+    end
+
+    # GET
     def crear
         #TODO mostra el formulario para crear un pedido con productos
     end
@@ -41,6 +47,23 @@ class Admin::PedidosController < Admin::AdminController
 
     # POST
     def guardar
+    end
+
+    # POST
+    def guardar_producto
+        detalle_pedido = @pedido.detalles_pedidos.find_by(producto_id: params[:id_producto])
+        if detalle_pedido
+            detalle_pedido.cantidad += 1
+        else
+            detalle_pedido = DetallesPedido.new(
+                pedido: @pedido,
+                producto_id: params[:id_producto],
+                cantidad: 1
+            )
+        end
+        detalle_pedido.save
+        
+        redirect_to action: :editar
     end
 
     # PUT/PATCH
