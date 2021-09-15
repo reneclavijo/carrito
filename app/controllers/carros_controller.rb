@@ -18,7 +18,7 @@ class CarrosController < ApplicationController
         redirect_to root_path
     end
 
-    # POST carros/:id_producto/cantidad
+    # PUT carros/:id_producto/cantidad
     def aumentar_cantidad_producto
         producto_para_agregar = Producto.find(params[:id_producto])
         contenido_carrito = @carro.carros_contenidos.find_by(producto: producto_para_agregar)

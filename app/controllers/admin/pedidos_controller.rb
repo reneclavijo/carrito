@@ -2,7 +2,7 @@ class Admin::PedidosController < Admin::AdminController
     
     include Admin::PedidosHelper
 
-    before_action :asignar_pedido, only: [:mostrar, :editar, :actualizar]
+    before_action :asignar_pedido, except: [:listar, :crear, :guardar]
 
     # GET
     def listar
@@ -35,6 +35,8 @@ class Admin::PedidosController < Admin::AdminController
         @estados    = EstadosPedido.select(:id, :estado).order(estado: :asc)
 
         @destinos   = Destino.select(:id, :nombre).order(nombre: :asc)
+
+        @productos = @pedido.detalles_pedidos # lista de productos
     end
 
     # POST
@@ -71,6 +73,40 @@ class Admin::PedidosController < Admin::AdminController
     # DELETE
     def eliminar
         #TODO analizar si vamos a elimnar el pedido o vamos a cambiar de estado
+    end
+
+    # PUT pedidos/:id/productos/:id_producto
+    def aumentar_cantidad_producto
+        detalle_pedido = @pedido.detalles_pedidos.find_by(producto_id: params[:id_producto])
+        detalle_pedido.cantidad += 1
+        detalle_pedido.save
+
+        respond_to do |format|
+            format.json { render json: {id: detalle_pedido.producto.id, cantidad: detalle_pedido.cantidad} }
+        end
+    end
+    
+    # DELETE pedidos/:id/productos/:id_producto
+    def disminuir_cantidad_producto
+        detalle_pedido = @pedido.detalles_pedidos.find_by(producto_id: params[:id_producto])
+        if detalle_pedido.cantidad - 1 <= 0
+            detalle_pedido.destroy
+        else
+            detalle_pedido.cantidad -= 1
+            detalle_pedido.save
+        end
+
+        respond_to do |format|
+            format.json { render json: {id: detalle_pedido.producto.id, cantidad: detalle_pedido.cantidad} }
+        end
+    end
+
+    # DELETE pedidos/:id/productos/:id_producto/eliminar
+    def eliminar_producto
+        detalle_pedido = @pedido.detalles_pedidos.find_by(producto_id: params[:id_producto])
+        detalle_pedido.destroy
+
+        redirect_to action: :editar
     end
 
     private 

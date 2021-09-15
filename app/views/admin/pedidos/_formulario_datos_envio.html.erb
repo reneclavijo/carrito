@@ -16,60 +16,98 @@
             </div>
         </div>
     </div>    
-    
 
-    <div class="mb-3">
-        <%= formulario.label :nombre, class: 'form-label' %>
-        <%= formulario.text_field :nombre, class: 'form-control' %>
-        <% if datos_pedido.errors[:nombre].any? %>
-            <div style="color: red">
-                <%= datos_pedido.errors[:nombre].first %>
+    <div class="row mt-4 justify-content-between">
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Datos envío
+                    </h4>
+                    <!-- DATOS DE ENVÍO -->
+                    <div class="row">
+                        <div class="col-12">
+                            <%= formulario.label :nombre, class: 'form-label' %>
+                            <%= formulario.text_field :nombre, class: 'form-control' %>
+                            <% if datos_pedido.errors[:nombre].any? %>
+                                <div style="color: red">
+                                    <%= datos_pedido.errors[:nombre].first %>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <%= formulario.label :correo, class: 'form-label' %>
+                            <%= formulario.text_field :correo, class: 'form-control' %>
+                            <% if datos_pedido.errors[:coreo].any? %>
+                                <div style="color: red">
+                                    <%= datos_pedido.errors[:correo].first %>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <%= formulario.label :telefono, class: 'form-label' %>
+                            <%= formulario.text_field :telefono, class: 'form-control' %>
+                            <% if datos_pedido.errors[:telefono].any? %>
+                                <div style="color: red">
+                                    <%= datos_pedido.errors[:telefono].first %>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <%= formulario.label :direccion, class: 'form-label' %>
+                            <%= formulario.text_field :direccion, class: 'form-control' %>
+                            <% if datos_pedido.errors[:direccion].any? %>
+                                <div style="color: red">
+                                    <%= datos_pedido.errors[:direccion].first %>
+                                </div>
+                            <% end %>                        
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <%= formulario.label :destino_id, class: 'form-label' %>
+                            <%= formulario.select(:destino_id,
+                                options_from_collection_for_select(destinos, :id, :nombre, datos_pedido.destino_id),
+                                {include_blank: 'Elige un destino'},
+                                {class: 'form-select'}) %>
+                            <% if datos_pedido.errors[:destino_id].any? %>
+                                <div style="color: red">
+                                    <%= datos_pedido.errors[:destino_id].first %>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div> <!-- Destinos 🗺 -->
+                    
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <%= formulario.submit "Actualizar pedido", class: 'btn btn-primary' %>
+                        </div>
+                    </div>
+                </div>
             </div>
-        <% end %>
-    </div>
+        </div> <!-- Formulario 🏂 -->
 
-    <div class="mb-3">
-        <%= formulario.label :correo, class: 'form-label' %>
-        <%= formulario.text_field :correo, class: 'form-control' %>
-        <% if datos_pedido.errors[:coreo].any? %>
-            <div style="color: red">
-                <%= datos_pedido.errors[:correo].first %>
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h6>
+                        <strong>
+                            TOTAL:
+                        </strong>
+                    </h6>
+                    <p>
+                        <!-- TODO: AGREAR TOTAL CALCULADO -->
+                        💵💵💵
+                    </p>
+                </div>
             </div>
-        <% end %>
+        </div> <!-- TOTAL 📎 -->
     </div>
-
-    <div class="mb-3">
-        <%= formulario.label :telefono, class: 'form-label' %>
-        <%= formulario.text_field :telefono, class: 'form-control' %>
-        <% if datos_pedido.errors[:telefono].any? %>
-            <div style="color: red">
-                <%= datos_pedido.errors[:telefono].first %>
-            </div>
-        <% end %>
-    </div>
-
-    <div class="mb-3">
-        <%= formulario.label :direccion, class: 'form-label' %>
-        <%= formulario.text_field :direccion, class: 'form-control' %>
-        <% if datos_pedido.errors[:direccion].any? %>
-            <div style="color: red">
-                <%= datos_pedido.errors[:direccion].first %>
-            </div>
-        <% end %>
-    </div>
-
-    <div class="mb-3">
-        <%= formulario.label :destino_id, class: 'form-label' %>
-        <%= formulario.select(:destino_id,
-            options_from_collection_for_select(destinos, :id, :nombre, datos_pedido.destino_id),
-            {include_blank: 'Elige un destino'},
-            {class: 'form-select'}) %>
-        <% if datos_pedido.errors[:destino_id].any? %>
-            <div style="color: red">
-                <%= datos_pedido.errors[:destino_id].first %>
-            </div>
-        <% end %>
-    </div>
-
-    <%= formulario.submit "Actualizar pedido", class: 'btn btn-primary' %>
 <% end %>
