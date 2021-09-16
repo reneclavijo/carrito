@@ -1,1 +1,14 @@
-@import 'animate.css';
+@import '../../../../node_modules/animate.css/animate.min.css';
+
+$theme-colors: (
+    "primary":    #49A68B,
+    "secondary":  #51548C,
+    "success":    #73D99F,
+    "info":       #6c757d,
+    "warning":    #F25270,
+    "danger":     #D94848,
+    "light":      #f8f9fa,
+    "dark":       #343a40
+    );
+    
+@import '../../../../node_modules/bootstrap/scss/bootstrap.scss';

@@ -40,7 +40,7 @@
                         <div class="col-12">
                             <%= formulario.label :correo, class: 'form-label' %>
                             <%= formulario.text_field :correo, class: 'form-control' %>
-                            <% if datos_pedido.errors[:coreo].any? %>
+                            <% if datos_pedido.errors[:correo].any? %>
                                 <div style="color: red">
                                     <%= datos_pedido.errors[:correo].first %>
                                 </div>
@@ -87,7 +87,7 @@
                     
                     <div class="row mt-3">
                         <div class="col-12">
-                            <%= formulario.submit "Actualizar pedido", class: 'btn btn-primary' %>
+                            <%= formulario.submit class: 'btn btn-primary text-white' %>
                         </div>
                     </div>
                 </div>

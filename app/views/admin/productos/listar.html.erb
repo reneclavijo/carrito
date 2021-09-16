@@ -3,7 +3,10 @@
         <h2>Productos Registrados</h2>
     </div>
     <div class="col text-end">
-        <%= link_to 'Nuevo producto', admin_nuevo_producto_path, class: "btn btn-success" %>
+        <%= link_to admin_nuevo_producto_path, class: "btn btn-primary text-white" do %>
+            <i class="bi bi-plus-circle"></i>
+            Crear producto
+        <% end %>
     </div>
 </div>
 

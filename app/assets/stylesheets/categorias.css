@@ -20,10 +20,10 @@
 
 .fila{
     background-color: white;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    border-radius: 0.2rem;
+    border-radius: 0.5rem;
     border: 1px solid #eeeeee;
 }
 
@@ -31,9 +31,9 @@
     color: white;
 }
 
-#navegacion{
+/* #navegacion{
     background-color: #00bcd4;
-}
+} */
 
 
 .boton-navbar-hamburguesa{
