@@ -53,7 +53,7 @@ class PedidosController < ApplicationController
     end
 
     def consultar_destinos
-        @destinos = Destino.select(:id, :nombre).order(nombre: :asc)
+        @destinos = Destino.select(:id, :nombre).order(nombre: :asc).select{ |d| d.nombre != "Sin destino" }
     end
 
     def validar_productos_carrito
