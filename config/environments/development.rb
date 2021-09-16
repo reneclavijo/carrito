@@ -40,14 +40,15 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
 
+  config.action_mailer.default_url_options = { :host => 'reneclavijo.com' }
+
   config.action_mailer.smtp_settings = {
-    addres:               'smtp.live.com',
-    domain:               'live.com',
+    address:               'smtp.zoho.com',
     port:                 587,
     user_name:            Rails.application.credentials.correo[:direccion],
     password:             Rails.application.credentials.correo[:password],
     authentication:       'plain',
-    enable_starttls_auto: 'none'
+    enable_starttls_auto: true
   }
 
   config.action_mailer.perform_caching = false

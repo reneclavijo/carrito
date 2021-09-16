@@ -69,15 +69,15 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { :host => 'carrito.reneclavijo.com' }
 
   config.action_mailer.smtp_settings = {
-    addres:               'smtp.live.com',
-    domain:               'reneclavijo.com',
+    address:               'smtp.zoho.com',
     port:                 587,
     user_name:            Rails.application.credentials.correo[:direccion],
     password:             Rails.application.credentials.correo[:password],
-    authentication:       'login',
-    enable_starttls_auto: 'none'
+    authentication:       'plain',
+    enable_starttls_auto: true
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
