@@ -42,32 +42,13 @@ Rails.application.configure do
 
   config.action_mailer.smtp_settings = {
     addres:               'smtp.live.com',
+    domain:               'live.com',
     port:                 587,
     user_name:            Rails.application.credentials.correo[:direccion],
     password:             Rails.application.credentials.correo[:password],
-    authentication:       'login',
+    authentication:       'plain',
     enable_starttls_auto: 'none'
   }
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
 
   config.action_mailer.perform_caching = false
 
