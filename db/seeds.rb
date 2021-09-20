@@ -34,6 +34,11 @@ Region.create([
     { nombre: 'Sin región' }
 ])
 
-Destino.first_or_create(
-    { nombre: 'Sin destino', region: Region.find_by(nombre: 'Sin región') }
-)
+# Destino.create(
+#     { nombre: 'Sin destino', region: Region.find_by(nombre: 'Sin región') }
+# )
+
+Administrador.create([
+    {nombre: 'rene', correo: 'rrodriguez@edutecno.com', password: Rails.application.credentials.admin[:password_admin1] },
+    {nombre: 'admin', correo: 'admin@edutecno.com', password: Rails.application.credentials.admin[:password_admin2] }
+])

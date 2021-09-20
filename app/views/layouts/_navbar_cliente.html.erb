@@ -1,4 +1,4 @@
-<nav id="navegacion" class="navbar navbar-expand-lg fixed-top">
+<nav id="navegacion" class="navbar navbar-expand-lg bg-secondary fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <i class="bi bi-shop"></i>
@@ -20,8 +20,44 @@
                         <i class="bi bi-cart-fill"></i>
                         Carrito <span class="badge bg-danger"><%= @carro.carros_contenidos.map{ |p| p.cantidad }.sum %> </span>
                     </a>
-                </li>                
+                </li>
+                <li class="nav-item dropdown">
+                    
+                    <% if usuario_ha_iniciado_sesion? %>
+
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <%= @usuario_actual.nombre %>
+                        </a><!-- Opción para mostrar el formulario ⏬ -->
+                        <div class="dropdown-menu bg-secondary p-3" style="border: none;">
+                            <%= link_to 'Cerrar sesión', cerrar_sesion_path, class: 'btn btn-warning', method: :delete, data: { confirm: 'está seguro de cerrar sesión?'} %>
+                        </div>
+
+                    <% else %>                   
+
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Iniciar sesión
+                        </a><!-- Opción para mostrar el formulario ⏬ -->
+
+                        <div class="dropdown-menu">
+                            <%= form_with(url: iniciar_sesion_path, class: 'p-4') do |formulario| %>
+                                <div class="mb-3">
+                                    <%= formulario.label :correo, class: 'form-label' %>
+                                    <%= formulario.text_field :correo, class: 'form-control', placeholder: 'nombre@ejemplo.com' %>
+                                </div>
+                                <div class="mb-3">
+                                    <%= formulario.label :password, class: 'form-label' %>
+                                    <%= formulario.password_field :password, class: 'form-control' %>
+                                </div>
+
+                                <%= formulario.submit 'Iniciar sesión', class: 'btn' %>
+                            <% end %>
+                        </div>
+
+                    <% end %>
+
+                </li>
             </ul>
         </div>
+        
     </div>
 </nav>
